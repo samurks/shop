@@ -2,7 +2,7 @@ import React from "react";
 import style from "./footer.module.css";
 import Image from "next/image";
 
-const Footer = () => {
+export default function Footer ()  {
   return (
     <footer className={style.footer}>
       <ul className={style.social}>
@@ -24,4 +24,3 @@ const Footer = () => {
   );
 };
 
-export default Footer;
