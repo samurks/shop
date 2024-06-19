@@ -51,3 +51,18 @@
     color: #555;
   }
   
+  .center{
+
+text-align: center;
+  }
+
+  .filters{
+    background-color: #f5f5f5;
+padding-top: 20px;
+  }
+
+  .buttons{
+    border-radius: 10px;
+     
+    
+  }
