@@ -13,6 +13,7 @@ export default function Header() {
           alt="Logo da loja"
         />
       </div>
+     
       <p className={style.marketing}>Descubra. Compre na Company. Sua loja online favorita.</p>
       <div className={style.cartIcon}>
       <button className={style.addButton}>Adicionar novo produto</button>

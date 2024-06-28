@@ -6,23 +6,49 @@ import Spinner from "./Spinner";
 
 export default function Main() {
 
-  const [listProduct, setProduct] = useState([])
+  const [listProduct, setListProduct] = useState([])
+  const [listComplete, setListComplete] = useState([])
+  const [textSearch, setTextSearch] = useState("")
+  const [listError, setListError] = useState([])
 
   useEffect( ()=> {
+   
       const getProduct = async() => {
+        try{
         const response = await fetch("https://fakestoreapi.com/products/");
         const data = await response.json();
-        setProduct(data);
+        setListProduct(data);
+        setListComplete(data);
       }
-     
-      getProduct()
+     catch{
+      setListError(true);
+     }
+    }
+    getProduct()
     },[]);
 
+    
+const search = text => {
+  setTextSearch(text);
+  
+  if(text == ""){
+    setListProduct(listComplete);
+    return
+  }
+  const newList = listProduct.filter((product) =>
+      product.title.toUpperCase().includes(textSearch.toUpperCase().trim()));
+
+      setListProduct(newList);
+  
+  }
+
+
+  
 
 const orderAz = () => {
   const listAux = [...listProduct].sort((a,b) =>
   a.title.localeCompare(b.title) );
-  setProduct(listAux);
+  setListProduct(listAux);
 }
 
 const orderZa = () => {
@@ -30,37 +56,42 @@ const orderZa = () => {
   a.title.localeCompare(b.title) );
 
   
-  setProduct(listAux);
+  setListProduct(listAux);
 }
+
 
 const orderDecrescent = () => {
   const listPrice = [...listProduct].reverse((a, b) => b.price - a.price);
 
-  setProduct(listPrice);
+  setListProduct(listPrice);
 
 }
 
 const orderCrescent = () => {
   const listPrice = [...listProduct].sort((a, b) => b.price - a.price);
 
-  setProduct(listPrice);
+  setListProduct(listPrice);
 }
 
-
-
-if(listProduct[0] == null){
-  return <Spinner />
+if (listComplete[0] == null) {
+  return  <Spinner />
 }
+
   return (
     <>
 <div className={style.filters}>
   <div className={style.center}>
+  <h2>Pesquisar:</h2>
+  <input type="text" value={textSearch}
+      onChange={(event) => search(event.target.value)}/>
     <h2>Ordenar Por:</h2>
     <div className={style.buttons}>
 <button onClick={orderAz}> A - Z </button>
 <button onClick={orderZa}> Z - A </button>
 <button onClick={orderDecrescent}> Maior Valor </button>
 <button onClick={orderCrescent}> Menor Valor </button>
+
+
 </div>
   </div>
 </div>
