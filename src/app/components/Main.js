@@ -61,16 +61,16 @@ const orderZa = () => {
 
 
 const orderDecrescent = () => {
-  const listPrice = [...listProduct].reverse((a, b) => b.price - a.price);
+  const listAux = [...listProduct].sort((a, b) => b.price - a.price);
 
-  setListProduct(listPrice);
+  setListProduct(listAux);
 
 }
 
 const orderCrescent = () => {
-  const listPrice = [...listProduct].sort((a, b) => b.price - a.price);
+  const listAux = [...listProduct].sort((a, b) => a.price - b.price);
 
-  setListProduct(listPrice);
+  setListProduct(listAux);
 }
 
 if (listComplete[0] == null) {
@@ -88,8 +88,8 @@ if (listComplete[0] == null) {
     <div className={style.buttons}>
 <button onClick={orderAz}> A - Z </button>
 <button onClick={orderZa}> Z - A </button>
-<button onClick={orderDecrescent}> Maior Valor </button>
-<button onClick={orderCrescent}> Menor Valor </button>
+<button onClick={orderDecrescent}> Menor Valor </button>
+<button onClick={orderCrescent}> Maior Valor </button>
 
 
 </div>
